@@ -1,11 +1,10 @@
 package com.habibu.conferencedemo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "attendees")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -20,6 +19,18 @@ public class Attendee {
     private String company;
     private String email;
     private String phone_number;
+
+    @ManyToMany(mappedBy = "attendees")
+    @JsonIgnore
+    private List<Workshop> workshops;
+
+    public List<Workshop> getWorkshops() {
+        return workshops;
+    }
+
+    public void setWorkshops(List<Workshop> workshops) {
+        this.workshops = workshops;
+    }
 
     public Long getAttendee_id() {
         return attendee_id;

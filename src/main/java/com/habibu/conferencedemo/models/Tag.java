@@ -1,11 +1,10 @@
 package com.habibu.conferencedemo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "tags")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -14,6 +13,12 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tag_id;
     private String description;
+
+
+
+    public Long getTag_id() {
+        return tag_id;
+    }
 
     public Long getTag_Id(){
         return tag_id;

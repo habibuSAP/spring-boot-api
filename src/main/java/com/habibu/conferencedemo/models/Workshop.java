@@ -2,10 +2,8 @@ package com.habibu.conferencedemo.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "workshops")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -20,6 +18,19 @@ public class Workshop {
     private String room;
     private Integer capacity;
 
+    @ManyToMany
+    @JoinTable(name = "workshop_registrations",
+            joinColumns = @JoinColumn(name = "workshop_id"),
+            inverseJoinColumns = @JoinColumn(name = "attendee_ticket_id"))
+    private List<Attendee> attendees;
+
+    public List<Attendee> getAttendees() {
+        return attendees;
+    }
+
+    public void setAttendees(List<Attendee> attendees) {
+        this.attendees = attendees;
+    }
 
     public Long getWorkshop_id() {
         return workshop_id;
